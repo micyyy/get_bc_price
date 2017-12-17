@@ -13,6 +13,16 @@ def hello(bot, update):
     update.message.reply_text(
         'Hello {}'.format(update.message.from_user.first_name))
 
+def help(bot, update):
+    msg = u'請參考：\n\n'
+    msg += u'/bito\n'
+    msg += u'/maicoin\n'
+    msg += u'/bfx_iotbtc\n'
+    msg += u'/bfx_iotusd\n'
+    msg += u'/bfx_iottwd\n'
+    
+    update.message.reply_text(msg)
+
 def is_number(s):
     try:
         float(s)
@@ -27,10 +37,9 @@ def get_bito_price(bot, update):
     res = requests.get(URL)
     price = json.loads(res.text)
     
-    msg = 'BTC/TWD\n\n'
-    #msg = 'TimeStamp:{}\n\n'.format(price['timestamp'])
-    msg += 'Buy: {}\n'.format(price['buy'])
-    msg += 'Sell: {}\n'.format(price['sell'])
+    msg = u'BTC/TWD\n\n'
+    msg += u'買入: {}\n'.format(price['buy'])
+    msg += u'賣出: {}\n'.format(price['sell'])
     
     update.message.reply_text(msg)
         
@@ -39,10 +48,9 @@ def get_maicoin_price(bot, update):
     res = requests.get(URL)
     price = json.loads(res.text)
     
-    msg = 'BTC/TWD\n\n'
-    #msg = 'TimeStamp:{}\n\n'.format(price['timestamp'])
-    msg += 'Buy: {}\n'.format(price['buy_price'])
-    msg += 'Sell: {}\n'.format(price['sell_price'])
+    msg = u'BTC/TWD\n\n'
+    msg += u'買入: {}\n'.format(price['buy_price'])
+    msg += u'賣出: {}\n'.format(price['sell_price'])
     
     update.message.reply_text(msg)
 
@@ -58,9 +66,9 @@ def get_bfx_iotbtc_price(bot, update, args):
     bid = float(price['bid']) * times
     ask = float(price['ask']) * times	    
 	
-    msg = 'IOTA/BTC\n\n'
-    msg += 'Buy: {}\n'.format(bid)
-    msg += 'Sell: {}\n'.format(ask)
+    msg = u'IOTA/BTC\n\n'
+    msg += u'買入: {}\n'.format(bid)
+    msg += u'賣出: {}\n'.format(ask)
     
     update.message.reply_text(msg)
 
@@ -76,9 +84,9 @@ def get_bfx_iotusd_price(bot, update, args):
     bid = float(price['bid']) * times
     ask = float(price['ask']) * times	
 	
-    msg = 'IOTA/USD\n\n'
-    msg += 'Buy: {}\n'.format(bid)
-    msg += 'Sell: {}\n'.format(ask)
+    msg = u'IOTA/USD\n\n'
+    msg += u'買入: {}\n'.format(bid)
+    msg += u'賣出: {}\n'.format(ask)
     
     update.message.reply_text(msg)
 
@@ -95,17 +103,20 @@ def get_bfx_iottwd_price(bot, update, args):
     bid = float(price['bid']) * rate['USD/TWD'] * times
     ask = float(price['ask']) * rate['USD/TWD'] * times
     
-    msg = 'IOTA/TWD\n\n'
-    msg += 'Buy: {}\n'.format(bid)
-    msg += 'Sell: {}\n'.format(ask)
-    msg += 'rate: {}\n'.format(rate['USD/TWD'])
+    msg = u'IOTA/TWD\n\n'
+    msg += u'買入: {}\n'.format(bid)
+    msg += u'賣出: {}\n'.format(ask)
+    msg += u'匯率: {}\n'.format(rate['USD/TWD'])
     
     update.message.reply_text(msg)
-    
+
 def main():
     updater = Updater(get_token('soso'))
-
+    
+    print(updater)
+    
     updater.dispatcher.add_handler(CommandHandler('hello', hello))
+    updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_handler(CommandHandler('bito', get_bito_price))
     updater.dispatcher.add_handler(CommandHandler('maicoin', get_maicoin_price))
     updater.dispatcher.add_handler(CommandHandler('bfx_iotbtc', get_bfx_iotbtc_price, pass_args=True))
@@ -114,7 +125,6 @@ def main():
 
     updater.start_polling()
     updater.idle()
-
 
 if __name__ == '__main__':
     main()

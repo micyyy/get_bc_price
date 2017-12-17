@@ -21,6 +21,15 @@ def write_ratefile(rate):
     jdict = dict()
     jdict['DATE'] = rate[0]
     jdict['USD/TWD'] = float(rate[1])
+    jdict['RMB/TWD'] = float(rate[2])
+    jdict['EUR/USD'] = float(rate[3])
+    jdict['USD/JPY'] = float(rate[4])
+    jdict['GBP/USD'] = float(rate[5])
+    jdict['AUD/USD'] = float(rate[6])
+    jdict['USD/HKD'] = float(rate[7])
+    jdict['USD/RMB'] = float(rate[8])
+    jdict['USD/ZAR'] = float(rate[9])
+    jdict['NZD/USD'] = float(rate[10])
     
     with open('rate.json', 'w') as f:
         json.dump(jdict, f)
