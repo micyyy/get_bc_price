@@ -111,7 +111,7 @@ def get_bfx_iottwd_price(bot, update, args):
     update.message.reply_text(msg)
 
 def main():
-    updater = Updater(get_token('soso'))
+    updater = Updater(get_token('momo'))
     
     print(updater)
     
