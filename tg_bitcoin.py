@@ -4,8 +4,8 @@ import json
 import taifex_exchange_rate
 import datetime
 
-def output_time():
-    print(datetime.datetime.now())
+def output_time(funcname):
+    print(datetime.datetime.now(), funcname)
 
 def get_token(botname):
     tgbot = dict()
@@ -39,7 +39,7 @@ def is_number(s):
     return False
 
 def get_bito_price(bot, update):
-    output_time()
+    output_time('get_bito_price')
     URL = 'https://www.bitoex.com/api/v1/get_rate'
     res = requests.get(URL)
     price = json.loads(res.text)
@@ -51,7 +51,7 @@ def get_bito_price(bot, update):
     update.message.reply_text(msg)
         
 def get_maicoin_price(bot, update):
-    output_time()
+    output_time('get_maicoin_price')
     URL = 'https://api.maicoin.com/v1/prices/twd'
     res = requests.get(URL)
     price = json.loads(res.text)
@@ -63,7 +63,7 @@ def get_maicoin_price(bot, update):
     update.message.reply_text(msg)
 
 def get_bfx_iotbtc_price(bot, update, args):
-    output_time()
+    output_time('get_bfx_iotbtc_price')
     URL = 'https://api.bitfinex.com/v1/pubticker/iotbtc'
     res = requests.get(URL)
     price = json.loads(res.text)
@@ -87,7 +87,7 @@ def get_bfx_iotbtc_price(bot, update, args):
     update.message.reply_text(msg)
 
 def get_bfx_iotusd_price(bot, update, args):
-    output_time()
+    output_time('get_bfx_iotusd_price')
     URL = 'https://api.bitfinex.com/v1/pubticker/iotusd'
     res = requests.get(URL)
     price = json.loads(res.text)
@@ -102,15 +102,15 @@ def get_bfx_iotusd_price(bot, update, args):
     ask = float(price['ask']) * times	
 	
     msg = u'IOTA/USD\n\n'
-    msg += u'單價：{:.6f} USD\n'.format(last_price)
-    msg += u'總價：{:.6f} USD\n\n'.format(total_price)    
-    msg += u'買入：{:.6f} USD\n'.format(bid)
-    msg += u'賣出：{:.6f} USD\n'.format(ask)
+    msg += u'單價：{:.4f} USD\n'.format(last_price)
+    msg += u'總價：{:.4f} USD\n\n'.format(total_price)    
+    msg += u'買入：{:.4f} USD\n'.format(bid)
+    msg += u'賣出：{:.4f} USD\n'.format(ask)
     
     update.message.reply_text(msg)
 
 def get_bfx_iottwd_price(bot, update, args):
-    output_time()
+    output_time('get_bfx_iottwd_price')
     URL = 'https://api.bitfinex.com/v1/pubticker/iotusd'
     res = requests.get(URL)
     print(res.text)
@@ -130,8 +130,8 @@ def get_bfx_iottwd_price(bot, update, args):
     
     msg = u'IOTA/TWD\n\n'
     
-    msg += u'單價：{:.6f} USD\n'.format(last_price_usd)
-    msg += u'總價：{:.6f} USD\n\n'.format(total_price_usd)
+    msg += u'單價：{:.4f} USD\n'.format(last_price_usd)
+    msg += u'總價：{:.4f} USD\n\n'.format(total_price_usd)
     msg += u'約 {:.0f} TWD\n\n'.format(total_price_twd)
     #msg += u'買入: {}\n'.format(bid)
     #msg += u'賣出: {}\n'.format(ask)
@@ -140,7 +140,7 @@ def get_bfx_iottwd_price(bot, update, args):
     update.message.reply_text(msg)
 
 def get_bfx_btcusd_price(bot, update, args):
-    output_time()
+    output_time('get_bfx_btcusd_price')
     URL = 'https://api.bitfinex.com/v1/pubticker/btcusd'
     res = requests.get(URL)
     price = json.loads(res.text)
@@ -158,10 +158,10 @@ def get_bfx_btcusd_price(bot, update, args):
     
     msg = u'BTC/USD\n\n'
 
-    msg += u'單價：{:.6f} USD\n'.format(last_price)
-    msg += u'總價：{:.6f} USD\n\n'.format(total_price)     
-    msg += u'買入：{:.2f} USD\n'.format(bid)
-    msg += u'賣出：{:.2f} USD\n'.format(ask)
+    msg += u'單價：{:.4f} USD\n'.format(last_price)
+    msg += u'總價：{:.4f} USD\n\n'.format(total_price)     
+    msg += u'買入：{:.4f} USD\n'.format(bid)
+    msg += u'賣出：{:.4f} USD\n'.format(ask)
         
     update.message.reply_text(msg)
     
