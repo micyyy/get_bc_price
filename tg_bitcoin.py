@@ -135,7 +135,7 @@ def get_bfx_iottwd_price(bot, update, args):
     msg += u'約 {:.0f} TWD\n\n'.format(total_price_twd)
     #msg += u'買入: {}\n'.format(bid)
     #msg += u'賣出: {}\n'.format(ask)
-    msg += u'匯率:{}\n\n'.format(rate['USD/TWD'])
+    msg += u'匯率：{}\n\n'.format(rate['USD/TWD'])
     
     update.message.reply_text(msg)
 
