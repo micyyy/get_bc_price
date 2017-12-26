@@ -48,6 +48,9 @@ def get_bito_price(bot, update):
     msg += u'買入：{} TWD\n'.format(price['buy'])
     msg += u'賣出：{} TWD\n'.format(price['sell'])
     
+    midprice = (float(price['buy']) + float(price['sell'])) / 2.0
+    msg += u'均價：{:.2f} TWD\n'.format(midprice)
+    
     update.message.reply_text(msg)
         
 def get_maicoin_price(bot, update):
@@ -59,6 +62,9 @@ def get_maicoin_price(bot, update):
     msg = u'BTC/TWD\n\n'
     msg += u'買入：{} TWD\n'.format(price['buy_price'])
     msg += u'賣出：{} TWD\n'.format(price['sell_price'])
+    
+    midprice = (float(price['buy_price']) + float(price['sell_price'])) / 2.0
+    msg += u'均價：{:.2f} TWD\n'.format(midprice)
     
     update.message.reply_text(msg)
 
